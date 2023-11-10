@@ -2,6 +2,8 @@ namespace AlfarBackendChallengeV2.src.Models.Customer
 {
     public class Customer
     {
+        public Customer() { }
+        
         public int Id { get; set; }
         public string Name { get; set; }
         public string Document { get; set; }

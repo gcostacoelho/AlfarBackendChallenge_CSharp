@@ -1,3 +1,6 @@
+using AlfarBackendChallengeV2.src.Data;
+using Microsoft.EntityFrameworkCore;
+
 public class Program
 {
     private static void Main(string[] args)
@@ -8,6 +11,8 @@ public class Program
             .SetBasePath(builder.Environment.ContentRootPath)
             .AddJsonFile("appsettings.json", true, true)
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true);
+
+        builder.Services.AddDbContext<AppDbContext>(op => op.UseSqlServer("Server=172.17.0.2,1433;Database=alfarBackend;TrustServerCertificate=True;User ID=sa;Password=1q2w3e4r@#$"));
 
         // Add services to the container.
         builder.Services.AddControllers();
