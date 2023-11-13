@@ -6,17 +6,19 @@ public class Program
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
-        builder.Configuration
-            .SetBasePath(builder.Environment.ContentRootPath)
+        var config = builder.Configuration;
+        
+        config.SetBasePath(builder.Environment.ContentRootPath)
             .AddJsonFile("appsettings.json", true, true)
-            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true);
+            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
+            .AddEnvironmentVariables();
 
-        builder.Services.AddDbContext<AppDbContext>(op => op.UseSqlServer("Server=172.17.0.2,1433;Database=alfarBackend;TrustServerCertificate=True;User ID=sa;Password=1q2w3e4r@#$"));
 
         // Add services to the container.
+        builder.Services.AddDbContext<AppDbContext>(op => op.UseSqlServer(config.GetConnectionString("DockerConnection")));
+        
         builder.Services.AddControllers();
-
+        
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
