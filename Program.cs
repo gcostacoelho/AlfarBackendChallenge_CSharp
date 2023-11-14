@@ -1,5 +1,4 @@
-using AlfarBackendChallengeV2.src.Data;
-using Microsoft.EntityFrameworkCore;
+using AlfarBackendChallengeV2.src.Configs;
 
 public class Program
 {
@@ -7,18 +6,17 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         var config = builder.Configuration;
-        
+
         config.SetBasePath(builder.Environment.ContentRootPath)
             .AddJsonFile("appsettings.json", true, true)
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
             .AddEnvironmentVariables();
 
+        builder.Services.RegisterServices();
+        builder.Services.registerDatabaseConnection(config);
 
-        // Add services to the container.
-        builder.Services.AddDbContext<AppDbContext>(op => op.UseSqlServer(config.GetConnectionString("DockerConnection")));
-        
         builder.Services.AddControllers();
-        
+
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
