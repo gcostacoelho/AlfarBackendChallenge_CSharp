@@ -8,7 +8,7 @@ namespace AlfarBackendChallengeV2.src.Configs
 {
     public static class DependencyInjectionConfigs
     {
-        public static void registerDatabaseConnection(this IServiceCollection services, IConfiguration configuration)
+        public static void RegisterDatabaseConnection(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>(op => op.UseSqlServer(configuration.GetConnectionString("DockerConnection")));
         }

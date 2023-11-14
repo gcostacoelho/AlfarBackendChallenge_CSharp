@@ -13,7 +13,7 @@ public class Program
             .AddEnvironmentVariables();
 
         builder.Services.RegisterServices();
-        builder.Services.registerDatabaseConnection(config);
+        builder.Services.RegisterDatabaseConnection(config);
 
         builder.Services.AddControllers();
 
