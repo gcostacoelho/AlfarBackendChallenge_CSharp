@@ -41,9 +41,13 @@ namespace AlfarBackendChallengeV2.src.Services.CustomerService
             return customer;
         }
 
-        public Task<IActionResult> DeleteCustomer(int customerId)
+        public async Task DeleteCustomer(int customerId)
         {
-            throw new NotImplementedException();
+            var customerToDelete = await _appDbContext.Customers.FindAsync(customerId);
+            
+            _appDbContext.Customers.Remove(customerToDelete);
+
+            await _appDbContext.SaveChangesAsync();
         }
 
     }

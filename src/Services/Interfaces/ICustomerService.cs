@@ -11,6 +11,6 @@ namespace AlfarBackendChallengeV2.src.Services.Interfaces
 
         Task<Customer> UpdateCustomer(int customerId, Customer customer);
 
-        Task<IActionResult> DeleteCustomer(int customerId);
+        Task DeleteCustomer(int customerId);
     }
 }
