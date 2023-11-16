@@ -28,6 +28,7 @@ namespace AlfarBackendChallengeV2.src.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<Customer> GetCustomerAsync([FromHeader, Required] int customerId)
         {
             var response = await _customerService.GetCustomer(customerId);
@@ -37,6 +38,7 @@ namespace AlfarBackendChallengeV2.src.Controllers
 
         [HttpPut]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<Customer> UpdateCustomerAsync([FromHeader, Required] int customerId, [FromBody, Required] Customer customer)
         {
             var response = await _customerService.UpdateCustomer(customerId, customer);
