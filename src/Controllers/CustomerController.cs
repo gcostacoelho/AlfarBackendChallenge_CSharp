@@ -19,31 +19,31 @@ namespace AlfarBackendChallengeV2.src.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
-        public async Task<Customer> PostNewCustomerAsync([FromBody, Required] Customer customer)
+        public async Task<IActionResult> PostNewCustomerAsync([FromBody, Required] Customer customer)
         {
             var response = await _customerService.PostNewCustomer(customer);
 
-            return response;
+            return Ok(response);
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<Customer> GetCustomerAsync([FromHeader, Required] int customerId)
+        public async Task<IActionResult> GetCustomerAsync([FromHeader, Required] int customerId)
         {
             var response = await _customerService.GetCustomer(customerId);
 
-            return response;
+            return Ok(response);
         }
 
         [HttpPut]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<Customer> UpdateCustomerAsync([FromHeader, Required] int customerId, [FromBody, Required] Customer customer)
+        public async Task<IActionResult> UpdateCustomerAsync([FromHeader, Required] int customerId, [FromBody, Required] Customer customer)
         {
             var response = await _customerService.UpdateCustomer(customerId, customer);
 
-            return response;
+            return Ok(response);
         }
 
         [HttpDelete]
@@ -52,7 +52,7 @@ namespace AlfarBackendChallengeV2.src.Controllers
         {
             await _customerService.DeleteCustomer(customerId);
 
-            return NoContent();
+            return Ok();
         }
     }
 }

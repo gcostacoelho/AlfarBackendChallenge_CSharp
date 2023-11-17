@@ -1,4 +1,5 @@
 using AlfarBackendChallengeV2.src.Configs;
+using AlfarBackendChallengeV2.src.Middleware;
 
 public class Program
 {
@@ -29,6 +30,8 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
+        app.UseMiddleware<ApiExceptionHandlerMiddleware>();
 
         app.UseHttpsRedirection();
 
