@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using AlfarBackendChallengeV2.src.Models.Customer;
 using AlfarBackendChallengeV2.src.Services.Interfaces;
+using AlfarBackendChallengeV2.src.Models.Utils;
 
 namespace AlfarBackendChallengeV2.src.Controllers
 {
@@ -16,9 +17,11 @@ namespace AlfarBackendChallengeV2.src.Controllers
         {
             _customerService = customerService;
         }
-
+        
         [HttpPost]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PostNewCustomerAsync([FromBody, Required] Customer customer)
         {
             var response = await _customerService.PostNewCustomer(customer);
@@ -28,7 +31,8 @@ namespace AlfarBackendChallengeV2.src.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCustomerAsync([FromHeader, Required] int customerId)
         {
             var response = await _customerService.GetCustomer(customerId);
@@ -38,7 +42,8 @@ namespace AlfarBackendChallengeV2.src.Controllers
 
         [HttpPut]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateCustomerAsync([FromHeader, Required] int customerId, [FromBody, Required] Customer customer)
         {
             var response = await _customerService.UpdateCustomer(customerId, customer);
@@ -47,7 +52,9 @@ namespace AlfarBackendChallengeV2.src.Controllers
         }
 
         [HttpDelete]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteCustomerAsync([FromHeader, Required] int customerId)
         {
             await _customerService.DeleteCustomer(customerId);

@@ -31,6 +31,10 @@ namespace AlfarBackendChallengeV2.src.Middleware
                     case HttpStatusCode.NoContent:
                         response.StatusCode = (int)HttpStatusCode.NoContent;
                         break;
+
+                    case HttpStatusCode.NotFound:
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        break;
                 }
 
                 var result = JsonConvert.SerializeObject(responseModel);

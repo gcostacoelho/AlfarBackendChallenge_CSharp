@@ -40,7 +40,7 @@ namespace AlfarBackendChallengeV2.src.Services.CustomerService
 
             if (customer == null)
             {
-                throw new ApiException("Customer not found", HttpStatusCode.NoContent);
+                throw new ApiException("Customer not found", HttpStatusCode.NotFound);
             }
 
             return customer;
@@ -49,6 +49,13 @@ namespace AlfarBackendChallengeV2.src.Services.CustomerService
 
         public async Task<Customer> UpdateCustomer(int customerId, Customer customer)
         {
+            var searchCustomerInDatabase = await _appDbContext.Customers.FindAsync(customerId);
+
+            if (searchCustomerInDatabase == null)
+            {
+                throw new ApiException("Customer not found", HttpStatusCode.NotFound);
+            }
+
             _appDbContext.Entry(customer).State = EntityState.Modified;
 
             await _appDbContext.SaveChangesAsync();
@@ -62,7 +69,7 @@ namespace AlfarBackendChallengeV2.src.Services.CustomerService
 
             if (customerToDelete == null)
             {
-                throw new ApiException("Customer not found", HttpStatusCode.NoContent);
+                throw new ApiException("Customer not found", HttpStatusCode.NotFound);
             }
 
             _appDbContext.Customers.Remove(customerToDelete);
