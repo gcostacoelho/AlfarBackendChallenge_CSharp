@@ -15,13 +15,15 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="src/" />
     <Folder Include="src/Configs/" />
+    <Folder Include="src/Controllers/" />
     <Folder Include="src/Data/" />
+    <Folder Include="src/Middleware/" />
     <Folder Include="src/Models/" />
     <Folder Include="src/Services/" />
   </ItemGroup>
