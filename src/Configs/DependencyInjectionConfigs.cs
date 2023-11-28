@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using AlfarBackendChallengeV2.src.Services.CustomerService;
 using AlfarBackendChallengeV2.src.Services.Interfaces;
+using AlfarBackendChallengeV2.src.Services.MailKitService;
 
 namespace AlfarBackendChallengeV2.src.Configs
 {
@@ -16,6 +17,7 @@ namespace AlfarBackendChallengeV2.src.Configs
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IMailKitService, MailKitService>();
         }
     }
 }
