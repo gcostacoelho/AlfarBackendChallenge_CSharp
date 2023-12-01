@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AlfarBackendChallengeV2.src.Models.Email;
 
 namespace AlfarBackendChallengeV2.src.Services.Interfaces
 {
     public interface IMailKitService
     {
-        
+        void SendEmail(Email emailInformations);
     }
 }

@@ -13,7 +13,7 @@ public class Program
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
             .AddEnvironmentVariables();
 
-        builder.Services.RegisterServices();
+        builder.Services.RegisterServices(config);
         builder.Services.RegisterDatabaseConnection(config);
 
         builder.Services.AddControllers();
