@@ -1,9 +1,20 @@
+using AlfarBackendChallengeV2.src.Interfaces;
+
 namespace AlfarBackendChallengeV2.src.Models.Utils
 {
-    public class AppSettingsConf
+    public class AppSettingsConf : IAppSettings
     {
-        public string SmtpEmail { get; set; }
-        public string SmtpUsername { get; set; }
-        public string SmtpPassword { get; set; }
+        private readonly IConfiguration _config;
+
+        public AppSettingsConf(IConfiguration configuration)
+        {
+            _config = configuration;
+        }
+
+        public string SmtpEmail => _config["AppSettings:SmtpEmail"];
+
+        public string SmtpUsername => _config["AppSettings:SmtpUsername"];
+
+        public string SmtpPassword => _config["AppSettings:SmtpPassword"];
     }
 }

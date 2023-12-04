@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using AlfarBackendChallengeV2.src.Models.Customer;
 using AlfarBackendChallengeV2.src.Services.Interfaces;
 using AlfarBackendChallengeV2.src.Models.Utils;
+using AlfarBackendChallengeV2.src.Models.Email;
 
 namespace AlfarBackendChallengeV2.src.Controllers
 {
@@ -12,10 +13,12 @@ namespace AlfarBackendChallengeV2.src.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
+        private readonly IMailKitService _mailKitServive;
 
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(ICustomerService customerService, IMailKitService mailKitService)
         {
             _customerService = customerService;
+            _mailKitServive = mailKitService;
         }
         
         [HttpPost]
@@ -60,6 +63,21 @@ namespace AlfarBackendChallengeV2.src.Controllers
             await _customerService.DeleteCustomer(customerId);
 
             return Ok();
+        }
+
+        // ! Somente para os testes do serviço de envio de email    
+        [HttpGet("email")]
+        public Email SendEmailAsync(){
+            var infos = new Email(){
+                Username = "Gustavo",
+                Subject = "Email de teste",
+                To = "gcostacoelho2003@gmail.com",
+                Body = "Vasco da Gama, campeão mundial (sonho do Simonetti)"
+            };
+
+            _mailKitServive.SendEmail(infos);
+
+            return infos;
         }
     }
 }

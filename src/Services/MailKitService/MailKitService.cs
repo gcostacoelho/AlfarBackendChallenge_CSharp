@@ -1,18 +1,17 @@
 using MimeKit;
 using MailKit.Net.Smtp;
 
+using AlfarBackendChallengeV2.src.Interfaces;
 using AlfarBackendChallengeV2.src.Models.Email;
 using AlfarBackendChallengeV2.src.Services.Interfaces;
-using AlfarBackendChallengeV2.src.Models;
-using Microsoft.Extensions.Options;
 
 namespace AlfarBackendChallengeV2.src.Services.MailKitService
 {
     public class MailKitService : IMailKitService
     {
-        private readonly IOptions<AppSettings> _appSettings;
+        private readonly IAppSettings _appSettings;
 
-        public MailKitService(IOptions<AppSettings> appSettings)
+        public MailKitService(IAppSettings appSettings)
         {
             _appSettings = appSettings;
         }
@@ -25,12 +24,11 @@ namespace AlfarBackendChallengeV2.src.Services.MailKitService
         {
             try
             {
-                var smtpInformations = _appSettings.Value.AppSettingsConf;
 
                 var email = new MimeMessage();
                 var smtp = new SmtpClient();
 
-                email.From.Add(new MailboxAddress(smtpInformations.SmtpUsername, smtpInformations.SmtpEmail));
+                email.From.Add(new MailboxAddress(_appSettings.SmtpUsername, _appSettings.SmtpEmail));
                 email.To.Add(new MailboxAddress(emailInformations.Username, emailInformations.To));
 
                 email.Subject = emailInformations.Subject;
@@ -42,7 +40,7 @@ namespace AlfarBackendChallengeV2.src.Services.MailKitService
 
                 smtp.Connect("smtp.gmail.com", 587, false);
 
-                smtp.Authenticate(smtpInformations.SmtpUsername, smtpInformations.SmtpPassword);
+                smtp.Authenticate(_appSettings.SmtpUsername, _appSettings.SmtpPassword);
 
                 smtp.Send(email);
 
