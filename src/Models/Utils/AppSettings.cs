@@ -2,11 +2,11 @@ using AlfarBackendChallengeV2.src.Interfaces;
 
 namespace AlfarBackendChallengeV2.src.Models.Utils
 {
-    public class AppSettingsConf : IAppSettings
+    public class AppSettings : IAppSettings
     {
         private readonly IConfiguration _config;
 
-        public AppSettingsConf(IConfiguration configuration)
+        public AppSettings(IConfiguration configuration)
         {
             _config = configuration;
         }

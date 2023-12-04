@@ -64,20 +64,5 @@ namespace AlfarBackendChallengeV2.src.Controllers
 
             return Ok();
         }
-
-        // ! Somente para os testes do serviço de envio de email    
-        [HttpGet("email")]
-        public Email SendEmailAsync(){
-            var infos = new Email(){
-                Username = "Gustavo",
-                Subject = "Email de teste",
-                To = "gcostacoelho2003@gmail.com",
-                Body = "Vasco da Gama, campeão mundial (sonho do Simonetti)"
-            };
-
-            _mailKitServive.SendEmail(infos);
-
-            return infos;
-        }
     }
 }

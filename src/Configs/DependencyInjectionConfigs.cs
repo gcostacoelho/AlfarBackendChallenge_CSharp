@@ -22,7 +22,7 @@ namespace AlfarBackendChallengeV2.src.Configs
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IMailKitService, MailKitService>();
 
-            services.AddSingleton<IAppSettings, AppSettingsConf>();
+            services.AddSingleton<IAppSettings, AppSettings>();
         }
     }
 }
