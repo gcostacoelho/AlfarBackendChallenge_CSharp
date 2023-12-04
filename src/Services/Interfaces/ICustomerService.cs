@@ -1,5 +1,4 @@
 using AlfarBackendChallengeV2.src.Models.Customer;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AlfarBackendChallengeV2.src.Services.Interfaces
 {

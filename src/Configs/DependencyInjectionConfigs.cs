@@ -7,6 +7,8 @@ using AlfarBackendChallengeV2.src.Services.MailKitService;
 
 using AlfarBackendChallengeV2.src.Interfaces;
 using AlfarBackendChallengeV2.src.Models.Utils;
+using AlfarBackendChallengeV2.src.Facades.Interfaces;
+using AlfarBackendChallengeV2.src.Facades;
 
 namespace AlfarBackendChallengeV2.src.Configs
 {
@@ -21,6 +23,7 @@ namespace AlfarBackendChallengeV2.src.Configs
         {
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IMailKitService, MailKitService>();
+            services.AddScoped<ICustomerFacade, CustomerFacade>();
 
             services.AddSingleton<IAppSettings, AppSettings>();
         }

@@ -1,10 +1,10 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
-using AlfarBackendChallengeV2.src.Models.Customer;
-using AlfarBackendChallengeV2.src.Services.Interfaces;
 using AlfarBackendChallengeV2.src.Models.Utils;
-using AlfarBackendChallengeV2.src.Models.Email;
+using AlfarBackendChallengeV2.src.Models.Customer;
+using AlfarBackendChallengeV2.src.Facades.Interfaces;
+using AlfarBackendChallengeV2.src.Services.Interfaces;
 
 namespace AlfarBackendChallengeV2.src.Controllers
 {
@@ -13,12 +13,12 @@ namespace AlfarBackendChallengeV2.src.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
-        private readonly IMailKitService _mailKitServive;
+        private readonly ICustomerFacade _customerFacade;
 
-        public CustomerController(ICustomerService customerService, IMailKitService mailKitService)
+        public CustomerController(ICustomerService customerService, ICustomerFacade customerFacade)
         {
             _customerService = customerService;
-            _mailKitServive = mailKitService;
+            _customerFacade = customerFacade;
         }
         
         [HttpPost]
@@ -27,7 +27,7 @@ namespace AlfarBackendChallengeV2.src.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PostNewCustomerAsync([FromBody, Required] Customer customer)
         {
-            var response = await _customerService.PostNewCustomer(customer);
+            var response = await _customerFacade.PostNewCustomerAndSendEmailAsync(customer);
 
             return Ok(response);
         }
