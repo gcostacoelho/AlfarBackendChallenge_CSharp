@@ -25,7 +25,7 @@ namespace AlfarBackendChallengeV2.src.Middleware
             catch (ApiException error)
             {
                 var responseModel = ApiResponse<string>.Fail(error.Message, error.StatusCode);
-                
+
                 switch (error.StatusCode)
                 {
                     case HttpStatusCode.NoContent:
@@ -34,6 +34,9 @@ namespace AlfarBackendChallengeV2.src.Middleware
 
                     case HttpStatusCode.NotFound:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
+                        break;
+                    case HttpStatusCode.BadRequest:
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
                 }
 
