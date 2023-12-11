@@ -1,8 +1,12 @@
-using AlfarBackendChallengeV2.src.Data;
 using Microsoft.EntityFrameworkCore;
 
-using AlfarBackendChallengeV2.src.Services.CustomerService;
+using AlfarBackendChallengeV2.src.Data;
 using AlfarBackendChallengeV2.src.Services.Interfaces;
+using AlfarBackendChallengeV2.src.Services.CustomerService;
+using AlfarBackendChallengeV2.src.Services.MailKitService;
+
+using AlfarBackendChallengeV2.src.Interfaces;
+using AlfarBackendChallengeV2.src.Models.Utils;
 
 namespace AlfarBackendChallengeV2.src.Configs
 {
@@ -16,6 +20,9 @@ namespace AlfarBackendChallengeV2.src.Configs
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IMailKitService, MailKitService>();
+
+            services.AddSingleton<IAppSettings, AppSettings>();
         }
     }
 }

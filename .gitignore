@@ -446,10 +446,7 @@ Icon
 
 # Directories potentially created on remote AFP share
 .AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+.AppleDesktopApp
 
 # content below from: https://github.com/github/gitignore/blob/master/Global/Windows.gitignore
 # Windows thumbnail cache files
@@ -479,3 +476,7 @@ $RECYCLE.BIN/
 # Migrations Folder
 
 Migrations/
+
+# appsettings
+
+appsettings.Development.json
